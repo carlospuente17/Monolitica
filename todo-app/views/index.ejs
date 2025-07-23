@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gestor de Tareas</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📝 Gestor de Tareas</h1>
+
+      <form action="/add" method="POST" class="form">
+        <input
+          type="text"
+          name="descripcion"
+          placeholder="Descripción"
+          required
+        />
+        <input type="date" name="fechaLimite" required />
+        <select name="prioridad" required>
+          <option value="">Prioridad</option>
+          <option value="alta">Alta</option>
+          <option value="media">Media</option>
+          <option value="baja">Baja</option>
+        </select>
+        <button type="submit">Agregar</button>
+      </form>
+
+      <div class="task-grid">
+        <% tasks %>
+        <% tasks.forEach(task => { %>
+        <div class="task-card <%= task.prioridad %>">
+          <div class="task-header">
+            <span class="task-id">#<%= task.id %></span>
+            <span class="task-priority"
+              ><%= task.prioridad.toUpperCase() %></span
+            >
+          </div>
+          <div class="task-body">
+            <p class="task-desc"><%= task.descripcion %></p>
+            <p class="task-date">📅 <%= task.fechaLimite %></p>
+          </div>
+          <div class="task-footer">
+            <a href="/delete/<%= task.id %>" class="delete-btn">Eliminar</a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
