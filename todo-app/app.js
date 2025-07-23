@@ -7,5 +7,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use('/', taskRoutes);
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`))
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor escuchando en puerto ${PORT}`));
+
